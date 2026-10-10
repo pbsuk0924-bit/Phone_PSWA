@@ -1,0 +1,23 @@
+특허명세서 워크벤치 · 3개 모듈 실행 안내
+
+구성
+- 모듈1_준비단계.bat: 준비 화면을 엽니다.
+- 모듈2_명세서작성.bat: 작성 화면을 엽니다.
+- 모듈3_검증수정.bat: 문단 검수 화면을 엽니다.
+- 전체모듈_연결실행.bat: 공용 서버를 한 번 실행하고 세 화면을 브라우저 탭으로 엽니다.
+- launch_module.bat: 위 모듈 실행 파일이 공유하는 실행 도우미입니다.
+- setup_dependencies.bat: 최초 1회 python-docx 의존성을 설치합니다.
+
+처음 한 번 setup_dependencies.bat을 실행하세요. Python 3가 필요합니다.
+AI 초안 작성 및 AI 문단 수정은 서버 환경에 OPENAI_API_KEY가 설정되어야 작동합니다.
+모듈 화면과 DOCX 내보내기는 전체모듈_연결실행.bat 또는 개별 모듈 배치파일로 실행할 수 있습니다.
+
+소스 위치
+- Module 1: index.html, src/app.js, src/styles.css
+- Module 2: drafting.html, src/drafting.js, src/drafting.css
+- Module 3: review.html, src/review.js, src/review.css
+- 공용 서버 및 AI/DOCX API: run_server.py
+- 설치 의존성: requirements.txt
+- 전체 안내: README.md
+
+각 .bat 파일은 프로젝트 폴더 안에 두고 실행해야 합니다. 실행 파일만 따로 옮기면 안 됩니다.

@@ -1,0 +1,71 @@
+.mobile-module-nav{display:none}
+@media(max-width:760px){
+  .app-shell{height:100dvh;min-height:100dvh;overflow:hidden}
+  .sidebar{display:none}
+  .main-area{height:100dvh;min-height:0;width:100%;overflow:hidden}
+  .topbar{padding:0 13px;gap:8px}
+  .breadcrumbs{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:11px}
+  .top-actions{gap:7px;flex:0 0 auto}
+  .top-actions .button{min-height:40px;padding:8px 10px;font-size:11px}
+  .main-scroll{padding:18px 12px calc(88px + env(safe-area-inset-bottom));overscroll-behavior:contain}
+  .page-heading{align-items:flex-start;gap:8px}
+  .page-heading h1{font-size:22px;line-height:1.25}
+  .page-heading .subheading{font-size:12px;line-height:1.55}
+  .version-chip{font-size:9px;white-space:nowrap;padding:6px 8px}
+  .module-rail{overflow-x:auto;max-width:none;gap:5px;padding:9px 8px;scrollbar-width:none}
+  .module-rail::-webkit-scrollbar{display:none}
+  .rail-step{min-width:105px;gap:6px;padding:5px}
+  .rail-step b{font-size:10px}
+  .rail-step small,.step-state{font-size:8px}
+  .rail-line{min-width:12px;margin:0 2px}
+  .project-toolbar{align-items:center;gap:8px;padding:10px}
+  .project-title-wrap{min-width:0}
+  .project-title-wrap h2{font-size:15px}
+  .project-title-wrap p{font-size:9px;line-height:1.4}
+  .toolbar-actions{gap:4px;flex-wrap:wrap;justify-content:flex-end}
+  .toolbar-actions .button{min-height:40px;padding:8px 9px;font-size:10px;white-space:nowrap}
+  .project-icon{flex:0 0 31px}
+  .panel,.side-panel{border-radius:10px}
+  .panel{padding:14px 12px}
+  .panel-heading{gap:8px}
+  .panel-heading h3,.side-panel h3{font-size:13px}
+  .panel-heading p,.side-panel p{font-size:10px;line-height:1.55}
+  .field-label{font-size:11px;margin:12px 0 6px}
+  .field-label .muted{font-size:9px}
+  .text-input,.material-input,.claim-textarea,.condition-row textarea,.draft-text,.paragraph-input{font-size:16px!important;line-height:1.6}
+  .text-input{min-height:44px;padding:10px}
+  .button,.icon-button,.segment,.source-select,.delete-material,.paragraph-number{min-height:40px}
+  .button{font-size:11px}
+  .segment{font-size:11px;padding:9px 12px}
+  .right-column{gap:10px}
+  .local-notice{font-size:10px}
+  .page-footer{font-size:8px;gap:8px;flex-wrap:wrap;padding-bottom:8px}
+  .mobile-module-nav{position:fixed;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));left:0;right:0;bottom:0;z-index:20;padding:6px 8px calc(6px + env(safe-area-inset-bottom));height:calc(62px + env(safe-area-inset-bottom));box-sizing:content-box;background:rgba(255,255,255,.97);border-top:1px solid #e7eaf1;box-shadow:0 -6px 20px rgba(30,45,75,.06);backdrop-filter:blur(16px)}
+  .mobile-module-nav a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px;border-radius:9px;text-decoration:none;color:#7d889b;font-size:12px;touch-action:manipulation}
+  .mobile-module-nav a span{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:#f3f5f8;color:#8792a3;font-size:9px;font-weight:700}
+  .mobile-module-nav a.active{background:#f2f3ff;color:#4f61ca}
+  .mobile-module-nav a.active span{background:#e3e7ff;color:#4f61ca}
+  .toast{bottom:calc(78px + env(safe-area-inset-bottom));width:max-content;max-width:calc(100% - 32px);text-align:center;font-size:12px}
+  .dialog{padding:20px;width:min(390px,calc(100% - 28px));}
+  .dialog h3{font-size:16px}.dialog p{font-size:13px}
+  .dialog .button{min-height:42px;font-size:12px}
+  .review-page .review-controls{grid-template-columns:1fr}
+  .review-page .review-instruction-panel{grid-row:auto}
+  .review-page .document-head{display:block}
+  .review-page .document-actions{justify-content:flex-start;margin-top:10px}
+  .review-page .document-actions .button{min-height:40px;font-size:10px}
+  .review-page .numbered-paragraphs{max-height:none;min-height:420px;overflow:visible}
+  .review-page .paragraph-input{min-height:74px}
+  .review-page .suggestion-copy{font-size:13px}
+  .review-page .suggestion-head b{font-size:11px}
+  .review-page .apply-suggestion{min-height:38px;font-size:10px}
+  .drafting-page .draft-text{min-height:60vh}
+  .drafting-page .editor-head p,.review-page .document-head p{font-size:10px}
+}
+@media(max-width:380px){
+  .main-scroll{padding-left:9px;padding-right:9px}
+  .version-chip{font-size:8px;padding:5px 6px}
+  .project-title-wrap p{max-width:135px}
+  .toolbar-actions .button{padding:7px 6px;font-size:9px}
+  .mobile-module-nav a{gap:4px;font-size:10px}
+}

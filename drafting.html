@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5f7fb" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>특허명세서 워크벤치 · 명세서 작성</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+  <link rel="stylesheet" href="./src/styles.css" />
+  <link rel="stylesheet" href="./src/drafting.css" />
+  <link rel="stylesheet" href="./src/mobile.css" />
+</head>
+<body class="drafting-page">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand brand-link" href="./index.html"><div class="brand-mark">P</div><div><strong>Patent Workbench</strong><small>명세서 작성 스튜디오</small></div></a>
+      <div class="workspace-label">워크스페이스</div><div class="workspace-name"><span class="workspace-dot"></span> 내 특허 프로젝트</div>
+      <div class="side-section-title">모듈</div>
+      <nav class="project-nav module-nav"><a href="./index.html"><span class="nav-project-icon">01</span><span class="nav-project-name">준비단계</span><span class="module-done">완료</span></a><a class="active" href="./drafting.html"><span class="nav-project-icon">02</span><span class="nav-project-name">명세서 작성</span></a><a href="./review.html"><span class="nav-project-icon">03</span><span class="nav-project-name">검증 · 수정</span><span class="module-done upcoming">다음</span></a></nav>
+      <div class="side-spacer"></div><div class="privacy-note"><span class="tiny-lock">▣</span><div><b>작성 공간</b><small>초안은 이 브라우저에도 저장됩니다.</small></div></div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar"><div class="breadcrumbs"><a href="./index.html">내 특허 프로젝트</a><span class="crumb-sep">/</span><b>명세서 작성</b></div><div class="top-actions"><span class="save-state"><i></i><span id="saveState">저장 전</span></span><button class="button button-quiet" id="importPacketBtn">패킷 가져오기</button><input id="packetFile" type="file" accept="application/json,.json" hidden /></div></header>
+      <div class="main-scroll">
+        <section class="page-heading"><div><div class="eyebrow">PATENT DRAFTING · MODULE 02</div><h1>발명의 상세한 설명 작성</h1><p class="subheading">준비단계의 청구항과 기술자료를 바탕으로 초안을 생성하고 직접 다듬습니다.</p></div><div class="version-chip"><span class="version-dot"></span> 작성 모듈 <b>v0.2.0</b></div></section>
+        <section class="module-rail" aria-label="모듈 진행 단계"><a class="rail-step complete" href="./index.html"><span class="step-number">✓</span><span><b>준비단계</b><small>자료와 작성 조건</small></span></a><div class="rail-line"></div><div class="rail-step active"><span class="step-number">2</span><span><b>명세서 작성</b><small>AI 초안 생성과 편집</small></span><span class="step-check">●</span></div><div class="rail-line"></div><div class="rail-step future"><span class="step-number">3</span><span><b>검증 · 수정</b><small>문단별 검토와 버전 저장</small></span><span class="step-state">다음 모듈</span></div></section>
+
+        <section class="project-toolbar"><div class="project-title-wrap"><div class="project-icon">✦</div><div><div class="project-title-line"><h2 id="projectTitle">준비 패킷을 불러오세요</h2></div><p id="projectMeta">준비 모듈에서 AI 작성 지시를 누르면 패킷이 전달됩니다.</p></div></div><div class="toolbar-actions"><button class="button button-quiet" id="refreshPacketBtn">패킷 다시 불러오기</button><button class="button button-primary" id="generateBtn"><span>✦</span> 명세서 초안 생성 <span class="button-arrow">→</span></button></div></section>
+
+        <div class="draft-layout">
+          <aside class="draft-sidebar">
+            <section class="side-panel packet-panel"><div class="side-panel-head"><h3>전달자료</h3><span class="packet-status" id="packetStatus">패킷 없음</span></div><p id="packetSummary">준비 모듈의 패킷을 연결하면 청구항, 기술자료, 출처 및 구성별 조건이 여기에 표시됩니다.</p><div class="packet-facts" id="packetFacts"></div><div class="packet-warning" id="packetWarning" hidden></div><button class="button button-outline full-width" id="manualImportBtn">JSON 패킷 선택</button></section>
+            <section class="side-panel"><div class="side-panel-head"><h3>작성 설정</h3><span class="module-stamp">contract 1.0</span></div><label class="field-label" for="modelInput">모델 ID <span class="muted">선택</span></label><input class="text-input" id="modelInput" value="gpt-5-mini" /><p class="microcopy model-note">서버의 OPENAI_MODEL을 설정하면 여기서 입력한 값보다 우선 적용됩니다.</p><label class="field-label" for="extraInstruction">추가 지시 <span class="muted">선택</span></label><textarea class="material-input" id="extraInstruction" placeholder="예: 도면 설명을 상세히 포함하고, 실시예의 결합 관계를 충분히 설명해 주세요."></textarea><div class="switch-note"><span>청구항 원문 보존</span><b>항상 적용</b></div></section>
+            <section class="side-panel prompt-note"><div class="side-panel-head"><h3>작성 기준</h3><span class="tiny-lock">▣</span></div><p>마스터 프롬프트는 서버에서 불러와 적용합니다. 브라우저에는 프롬프트 원문을 전달하지 않습니다. 배포 환경에서는 서버 접근을 제한하고 비밀 저장소를 사용하세요.</p></section>
+          </aside>
+          <section class="panel editor-panel">
+            <div class="editor-head"><div><div class="panel-kicker">GENERATED SPECIFICATION</div><h3>발명의 상세한 설명</h3><p id="draftMeta">패킷을 확인한 뒤 초안 생성을 시작하세요.</p></div><div class="editor-actions"><button class="button button-outline" id="saveDraftBtn">브라우저에 저장</button><button class="button button-primary" id="downloadDocxBtn" disabled>DOCX 다운로드</button></div></div>
+            <div class="editor-tools"><span><i class="autosave-dot"></i><span id="editorState">생성 대기 중</span></span><span id="wordCount">0자</span></div>
+            <textarea id="draftText" class="draft-text" spellcheck="false" placeholder="AI가 작성한 명세서가 여기에 표시됩니다. 생성 후 직접 수정할 수 있습니다."></textarea>
+            <div class="editor-footer"><span>수정 내용은 브라우저에 자동 저장됩니다.</span><button class="text-button" id="copyTextBtn">본문 복사 <span>↗</span></button></div>
+            <div class="next-module-callout" id="review"><span class="next-icon">03</span><span><b>다음 단계 · 검증 및 수정</b><small>현재 브라우저에 저장된 초안을 문단별 검수 화면으로 전달합니다.</small></span><button class="button button-outline review-open" id="exportDraftJsonBtn">검수 JSON 백업</button><a class="button button-outline review-open" href="./review.html">검수 화면 열기 →</a></div>
+          </section>
+        </div>
+        <footer class="page-footer"><span>Patent Workbench · Drafting Module</span><span>패킷 계약 <b>1.0</b> · 작성 모듈 <b>0.2.0</b></span></footer>
+      </div>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <nav class="mobile-module-nav" aria-label="모듈 이동"><a href="./index.html"><span>01</span><b>준비</b></a><a class="active" aria-current="page" href="./drafting.html"><span>02</span><b>작성</b></a><a href="./review.html"><span>03</span><b>검수</b></a></nav>
+  <dialog id="confirmDialog" class="dialog"><form method="dialog"><div class="dialog-mark">?</div><h3 id="dialogTitle">확인</h3><p id="dialogMessage"></p><div class="dialog-actions"><button class="button button-quiet" value="cancel">취소</button><button class="button button-primary" id="dialogConfirm" value="confirm">계속</button></div></form></dialog>
+  <script type="module" src="./src/drafting.js"></script>
+  <script src="./src/pwa.js"></script>
+</body>
+</html>

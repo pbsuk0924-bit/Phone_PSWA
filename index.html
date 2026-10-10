@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5f7fb" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>특허명세서 워크벤치 · 준비단계</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+  <link rel="stylesheet" href="./src/styles.css" />
+  <link rel="stylesheet" href="./src/mobile.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">P</div><div><strong>Patent Workbench</strong><small>명세서 작성 스튜디오</small></div></div>
+      <div class="workspace-label">워크스페이스 <span class="chevron">⌄</span></div>
+      <div class="workspace-name"><span class="workspace-dot"></span> 내 특허 프로젝트</div>
+      <div class="side-section-title">프로젝트 <button class="icon-button" id="newProjectBtn" title="새 프로젝트">＋</button></div>
+      <nav id="projectNav" class="project-nav" aria-label="프로젝트 목록"></nav>
+      <div class="side-spacer"></div>
+      <div class="privacy-note"><span class="tiny-lock">▣</span><div><b>내 작업 공간</b><small>자료는 이 브라우저에 저장됩니다.</small></div></div>
+      <div class="profile"><div class="avatar">김</div><div><b>사용자</b><small>개인 워크스페이스</small></div><button class="more">···</button></div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar"><div class="breadcrumbs"><span>내 특허 프로젝트</span><span class="crumb-sep">/</span><b id="crumbProject">새 프로젝트</b></div><div class="top-actions"><span class="save-state"><i></i><span id="saveState">저장됨</span></span><button class="button button-quiet" id="exportBtn">내보내기</button><div class="avatar avatar-small">김</div></div></header>
+      <div class="main-scroll">
+        <section class="page-heading"><div><div class="eyebrow">PATENT DRAFTING · WORKSPACE</div><h1>명세서 작성 준비</h1><p class="subheading">청구항과 기술자료를 정리하고, 작성에 필요한 정보가 갖춰졌는지 확인합니다.</p></div><div class="version-chip"><span class="version-dot"></span> 준비 모듈 <b>v0.2.0</b></div></section>
+        <section class="module-rail" aria-label="모듈 진행 단계"><div class="rail-step active"><span class="step-number">1</span><span><b>준비단계</b><small>자료와 작성 조건</small></span><span class="step-check">●</span></div><div class="rail-line"></div><a class="rail-step future rail-link" href="./drafting.html"><span class="step-number">2</span><span><b>명세서 작성</b><small>준비자료로 초안 생성</small></span><span class="step-state">작성 모듈</span></a><div class="rail-line"></div><a class="rail-step future rail-link" href="./review.html"><span class="step-number">3</span><span><b>검증 · 수정</b><small>문단별 검토와 버전 저장</small></span><span class="step-state">검수 모듈</span></a></section>
+        <section class="project-toolbar"><div class="project-title-wrap"><div class="project-icon">✦</div><div><div class="project-title-line"><h2 id="projectTitle">새 프로젝트</h2><button class="icon-button subtle" id="renameBtn" aria-label="프로젝트 이름 편집">✎</button></div><p id="projectMeta">준비 단계 · 아직 청구항이 입력되지 않았습니다</p></div></div><div class="toolbar-actions"><button class="button button-quiet" id="duplicateBtn">복제</button><button class="button button-primary" id="runModule2Btn"><span>✦</span> AI 작성 지시 <span class="button-arrow">→</span></button></div></section>
+
+        <div class="content-grid">
+          <div class="main-column">
+            <section class="panel claim-panel">
+              <div class="panel-heading"><div class="panel-heading-left"><div class="section-icon indigo">01</div><div><h3>청구항</h3><p>직접 작성한 청구항을 입력합니다. 입력한 문구는 AI가 임의로 변경하지 않습니다.</p></div></div><span class="required-tag">필수</span></div>
+              <label class="field-label" for="claimsInput">청구항 텍스트 <span class="muted">독립항과 종속항을 함께 입력할 수 있어요</span></label>
+              <textarea id="claimsInput" class="claim-textarea" placeholder="예시)\n【청구항 1】\n대상물의 상태를 감지하는 센서부;\n상기 센서부의 감지 결과에 기초하여 동작 조건을 판단하는 제어부; 및\n상기 제어부의 제어에 따라 동작하는 구동부를 포함하는 장치.\n\n【청구항 2】\n청구항 1에 있어서, 상기 센서부는 복수의 센서를 포함하는 장치."></textarea>
+              <div class="field-footer"><span><span id="claimCount">0</span>자 입력</span><button class="text-button" id="parseClaimsBtn">구성요소 미리보기 <span>→</span></button></div>
+              <div class="components-preview" id="componentsPreview" hidden></div>
+            </section>
+
+            <section class="panel materials-panel">
+              <div class="panel-heading"><div class="panel-heading-left"><div class="section-icon teal">02</div><div><h3>기술자료 수집</h3><p>직접 입력하거나 ChatGPT 웹 검색으로 조사해 자료를 모읍니다.</p></div></div><span class="count-pill" id="materialsCount">0개 자료</span></div>
+              <div class="segmented-tabs" role="tablist"><button class="segment active" data-tab="manual" role="tab">직접 입력</button><button class="segment" data-tab="ai" role="tab">AI 자료 조사</button></div>
+              <div class="tab-panel" id="manualPanel"><label class="field-label" for="materialTitle">자료 제목 <span class="muted">예: 센서 배치 구조, 발명자 미팅 메모</span></label><input id="materialTitle" class="text-input" placeholder="자료 제목을 입력하세요"/><label class="field-label" for="materialBody">자료 내용</label><textarea id="materialBody" class="material-input" placeholder="구성의 구조, 기능, 연결관계, 동작 방식이나 확인된 실시예를 입력하세요."></textarea><div class="row-actions"><span class="microcopy">출처와 확인 여부를 함께 기록할 수 있습니다.</span><button class="button button-outline" id="addMaterialBtn">＋ 자료 추가</button></div></div>
+              <div class="tab-panel" id="aiPanel" hidden><div class="ai-callout"><div class="ai-spark">✦</div><div><b>무엇을 더 조사할까요?</b><p>청구항 구성별로 필요한 정보나 확인할 자료를 자연어로 적어주세요. 검색 출처가 결과에 함께 저장됩니다.</p></div></div><label class="field-label" for="aiInstruction">수집 지시</label><textarea id="aiInstruction" class="material-input ai-input" placeholder="예: 제어부가 센서 신호를 처리하는 방식과 임계값 설정 변형례를 추가로 조사해 주세요."></textarea><div class="row-actions"><span class="microcopy"><span class="status-pip"></span> API 검색은 별도 사용량 과금이 적용될 수 있습니다</span><button class="button button-outline" id="addAiTaskBtn">✦ AI 조사 실행</button></div></div>
+              <div class="materials-list" id="materialsList"></div>
+            </section>
+
+            <section class="panel coverage-panel">
+              <div class="panel-heading"><div class="panel-heading-left"><div class="section-icon amber">03</div><div><h3>자료 확인 및 보완</h3><p>각 구성의 기능과 구조를 실시예로 설명할 수 있을 만큼 근거가 있는지 점검합니다.</p></div></div><button class="button button-outline button-small" id="analyzeBtn">자료 충분성 점검 <span>↗</span></button></div>
+              <div id="coverageEmpty" class="empty-state"><div class="empty-illustration">⌕</div><div><b>먼저 청구항과 자료를 입력해 주세요</b><p>구성요소별 자료 현황과 추가 확인 질문을 여기서 확인할 수 있습니다.</p></div></div>
+              <div id="coverageResults" class="coverage-results" hidden></div>
+            </section>
+
+            <section class="panel conditions-panel">
+              <div class="panel-heading"><div class="panel-heading-left"><div class="section-icon violet">04</div><div><h3>작성 조건</h3><p>구성별 범위, 하위구성, 선택사항 등 상세한 설명에 반영할 방향을 기록합니다.</p></div></div><span class="optional-tag">선택</span></div>
+              <div class="condition-intro"><span class="info-icon">i</span> 청구항에서 찾은 구성요소별로 작성 조건을 설정할 수 있습니다.</div>
+              <div id="conditionsList" class="conditions-list"><div class="condition-blank">청구항을 입력하면 구성별 조건 입력란이 표시됩니다.</div></div>
+            </section>
+          </div>
+
+          <aside class="right-column">
+            <section class="side-panel readiness-panel"><div class="side-panel-head"><h3>준비 현황</h3><span class="live-label"><i></i> 실시간</span></div><div class="readiness-score"><div class="score-ring" id="scoreRing"><div><strong id="scoreValue">0</strong><small>%</small></div></div><div><b id="readinessLabel">준비를 시작해 보세요</b><p id="readinessText">청구항과 자료를 입력하면<br/>작성 준비도를 확인할 수 있어요.</p></div></div><div class="progress-track"><span id="progressFill"></span></div><div class="checklist" id="checklist"></div></section>
+            <section class="side-panel handoff-panel"><div class="side-panel-head"><h3>다음 단계로 전달</h3><span class="handoff-icon">↗</span></div><p>준비가 끝나면 청구항, 자료 출처, 작성 조건을 묶어 명세서 작성 모듈에 전달합니다.</p><div class="handoff-includes"><span>✓ 청구항 원문</span><span>✓ 자료와 출처 구분</span><span>✓ 구성별 FSROE 보완 현황</span><span>✓ 작성 조건 및 유의사항</span></div><button class="button button-primary full-width" id="handoffBtn">준비자료 패킷 JSON 백업 <span>↓</span></button><small class="handoff-note">AI 작성 지시는 2번 모듈을 열어 패킷을 바로 전달합니다.</small></section>
+            <section class="principles-card"><div class="principles-top"><span>✧</span><b>작성 원칙이 적용됩니다</b></div><p>첨부된 마스터 프롬프트의 기준에 따라 자료가 없는 사실이나 수치가 임의로 만들어지지 않도록 입력과 출처를 구분합니다.</p><span class="prompt-runtime-note">프롬프트 원문은 개발자 자료로 관리됩니다.</span></section>
+            <div class="local-notice"><span>▣</span><span>프로젝트와 준비자료는 브라우저에 저장됩니다. AI 초안과 DOCX는 run_server.py의 서버 연결이 필요합니다.</span></div>
+          </aside>
+        </div>
+        <footer class="page-footer"><span>Patent Workbench · Preparation Module</span><span>모듈 계약 <b>1.0</b> · 준비 모듈 <b>0.2.0</b></span></footer>
+      </div>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <nav class="mobile-module-nav" aria-label="모듈 이동"><a class="active" aria-current="page" href="./index.html"><span>01</span><b>준비</b></a><a href="./drafting.html"><span>02</span><b>작성</b></a><a href="./review.html"><span>03</span><b>검수</b></a></nav>
+  <dialog id="confirmDialog" class="dialog"><form method="dialog"><div class="dialog-mark">?</div><h3 id="dialogTitle">확인</h3><p id="dialogMessage"></p><div class="dialog-actions"><button class="button button-quiet" value="cancel">취소</button><button class="button button-primary" id="dialogConfirm" value="confirm">계속</button></div></form></dialog>
+  <script type="module" src="./src/app.js"></script>
+  <script src="./src/pwa.js"></script>
+</body>
+</html>
