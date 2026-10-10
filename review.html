@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f5f7fb" />
+  <title>특허명세서 워크벤치 · 검증 및 수정</title>
+  <link rel="stylesheet" href="./src/styles.css" />
+  <link rel="stylesheet" href="./src/drafting.css" />
+  <link rel="stylesheet" href="./src/review.css" />
+</head>
+<body class="review-page">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand brand-link" href="./index.html"><div class="brand-mark">P</div><div><strong>Patent Workbench</strong><small>명세서 작성 스튜디오</small></div></a>
+      <div class="workspace-label">워크스페이스</div><div class="workspace-name"><span class="workspace-dot"></span> 내 특허 프로젝트</div>
+      <div class="side-section-title">모듈</div>
+      <nav class="project-nav module-nav" aria-label="모듈 이동"><a href="./index.html"><span class="nav-project-icon">01</span><span class="nav-project-name">준비단계</span></a><a href="./drafting.html"><span class="nav-project-icon">02</span><span class="nav-project-name">명세서 작성</span></a><a class="active" href="./review.html"><span class="nav-project-icon">03</span><span class="nav-project-name">검증 · 수정</span><span class="module-done">현재</span></a></nav>
+      <div class="side-spacer"></div><div class="privacy-note"><span class="tiny-lock">▣</span><div><b>검수 공간</b><small>수정사항은 브라우저에 저장됩니다.</small></div></div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar"><div class="breadcrumbs"><a href="./index.html">내 특허 프로젝트</a><span class="crumb-sep">/</span><b>검증 · 수정</b></div><div class="top-actions"><span class="save-state"><i></i><span id="saveState">초안 확인 중</span></span><button class="button button-quiet" id="importDraftBtn">검수 JSON 가져오기</button><input id="draftFile" type="file" accept="application/json,.json" hidden /></div></header>
+      <div class="main-scroll">
+        <section class="page-heading"><div><div class="eyebrow">PATENT DRAFTING · MODULE 03</div><h1>명세서 검증 · 수정</h1><p class="subheading">문단별로 검토하고, 수정안을 비교한 다음 새 버전으로 저장합니다.</p></div><div class="version-chip"><span class="version-dot"></span> 검수 모듈 <b>v0.3.0</b></div></section>
+        <section class="module-rail" aria-label="모듈 진행 단계"><a class="rail-step complete" href="./index.html"><span class="step-number">✓</span><span><b>준비단계</b><small>자료와 작성 조건</small></span></a><div class="rail-line"></div><a class="rail-step complete" href="./drafting.html"><span class="step-number">✓</span><span><b>명세서 작성</b><small>초안 생성과 편집</small></span></a><div class="rail-line"></div><div class="rail-step active"><span class="step-number">3</span><span><b>검증 · 수정</b><small>문단별 검토와 버전 저장</small></span><span class="step-check">●</span></div></section>
+        <section class="project-toolbar"><div class="project-title-wrap"><div class="project-icon">✓</div><div><div class="project-title-line"><h2 id="projectTitle">저장된 초안을 불러오는 중</h2></div><p id="projectMeta">문단을 선택해 수정 지시를 입력하거나 우측 본문을 직접 편집하세요.</p></div></div><div class="toolbar-actions"><button class="button button-quiet" id="saveBrowserBtn">브라우저 저장</button><button class="button button-primary" id="saveVersionBtn"><span>↓</span> 수정본 저장</button></div></section>
+        <div class="review-layout">
+          <aside class="review-controls">
+            <section class="side-panel review-instruction-panel"><div class="side-panel-head"><h3>문단 수정 지시</h3><span class="module-stamp">AI 제안</span></div><p class="review-hint">수정할 문단 번호와 요청 내용을 입력하면 AI가 해당 문단만 수정 제안합니다. 제안은 직접 적용하기 전까지 본문에 반영되지 않습니다.</p>
+              <label class="field-label" for="paragraphNumbers">문단 번호 <span class="muted">예: 2, 5, 8</span></label><input class="text-input" id="paragraphNumbers" placeholder="수정할 번호를 입력하세요" inputmode="numeric" />
+              <label class="field-label" for="revisionInstruction">수정 지시</label><textarea class="material-input instruction-input" id="revisionInstruction" placeholder="예: 3번 문단에서 제어부와 센서부의 신호 전달 순서를 더 명확하게 설명해 주세요."></textarea>
+              <button class="button button-primary full-width" id="requestRevisionBtn">지정 문단 수정 제안 받기 <span>→</span></button>
+              <div class="revision-status" id="revisionStatus" aria-live="polite">AI 제안을 받으면 아래에서 문단별로 확인하고 적용할 수 있습니다.</div>
+              <div class="suggestions" id="suggestions"></div>
+            </section>
+            <section class="side-panel version-panel"><div class="side-panel-head"><h3>저장 버전</h3><span id="versionCount" class="module-stamp">0개</span></div><p>저장할 때마다 새 파일명에 버전 번호를 붙입니다. 기존 문서는 덮어쓰지 않습니다.</p><div id="versionList" class="version-list"><span class="version-empty">아직 저장된 수정 버전이 없습니다.</span></div></section>
+            <section class="side-panel review-principles"><div class="side-panel-head"><h3>검수 원칙</h3><span class="tiny-lock">▣</span></div><p>청구항은 자동으로 수정하지 않습니다. 근거가 부족한 정보는 발명자 확인 대상으로 남기고, AI 수정 제안은 검토 후 직접 적용하세요.</p></section>
+          </aside>
+          <section class="panel document-panel">
+            <div class="document-head"><div><div class="panel-kicker">NUMBERED PARAGRAPHS</div><h3>작성된 명세서</h3><p id="documentMeta">초안 불러오기 전</p></div><div class="document-actions"><button class="button button-outline" id="selectAllBtn">전체 문단 선택</button><button class="button button-outline" id="exportReviewJsonBtn">JSON 백업</button></div></div>
+            <div class="document-toolbar"><span><i class="autosave-dot"></i><span id="documentState">초안 확인 중</span></span><span id="paragraphCount">0개 문단</span></div>
+            <div class="numbered-paragraphs" id="paragraphList" aria-label="번호가 붙은 편집 가능 문단 목록"></div>
+            <div class="document-footer"><span>우측 문단은 직접 수정할 수 있습니다. 수정 내용은 자동 저장됩니다.</span><span id="documentCharacters">0자</span></div>
+          </section>
+        </div>
+        <footer class="page-footer"><span>Patent Workbench · Review Module</span><span>문서 스키마 <b>1.0</b> · 검수 모듈 <b>0.3.0</b></span></footer>
+      </div>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="confirmDialog" class="dialog"><form method="dialog"><div class="dialog-mark">?</div><h3 id="dialogTitle">확인</h3><p id="dialogMessage"></p><div class="dialog-actions"><button class="button button-quiet" value="cancel">취소</button><button class="button button-primary" id="dialogConfirm" value="confirm">계속</button></div></form></dialog>
+  <script type="module" src="./src/review.js"></script>
+</body>
+</html>
